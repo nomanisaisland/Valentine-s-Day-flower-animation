@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>页面切换</title>
+	<style type="text/css">
+	 * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    ul,
+    li {
+        list-style-type: none;
+    }
+    
+    #content {
+        width: 100%;
+        height: 100%;
+        /* top: 20%;
+        left: 20%; */
+        overflow: hidden;
+        position: absolute;
+    }
+    
+    .content-wrap {
+        position: relative;
+    }
+    
+    .content-wrap > li {
+        background: #CAE1FF;
+        color: red;
+        float: left;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    li:nth-child(2) {
+        background: #9BCD9B;
+    }
+    
+    li:nth-child(3) {
+        background: yellow;
+    }
+    
+    button {
+        width: 100px;
+        height: 50px;
+    }
+    
+    .button {
+        position: absolute;
+        bottom: 0;
+    }
+	</style>
+</head>
+<body>
+
+	<div id='content'>
+        <ul class='content-wrap'>
+            <!-- 第一副画面 -->
+            <li> 页面1 </li>
+            <!-- 第二副画面 -->
+            <li> 页面2 </li>
+            <!-- 第三副画面 -->
+            <li> 页面3 </li>
+        </ul>
+        <div class="button">
+            <button>点击切换页面</button>
+        </div>
+    </div>
+
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    var container = $("#content");
+    var element = container.find(":first");
+    var slides = element.find("li");
+    var width = container.width();
+    var height = container.height();
+    element.css({
+        width: (slides.length*width) + "px",
+        height: height + "px"
+    });
+    $.each(slides,function(index){
+        var slide = slides.eq(index);
+        slide.css({
+            width: width + "px",
+            height: height + "px" 
+        })
+    })
+    // 为什么和上面的结果不同
+    /*$("slides").each(function(index) {
+        var slide = slides.eq(index);
+        slide.css({
+            width: width + "px",
+            height: height + "px" 
+        })
+    })*/
+    $(".button").click(function() {
+        element.css({
+            'transition-timing-function': 'linear', //以相同的速度从开始到结束的过渡效果
+            'transition-duration': '5000ms',  //让过渡效果持续 5 秒
+            'transform': 'translate3d(-' + (width * 2) +'px,0px,0px)'  //定义 3D 转换。
+        })
+    })
+</script>
+</body>
+</html>

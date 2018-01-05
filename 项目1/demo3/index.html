@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>页面切换部分的代码封装</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div id='content'>
+        <ul class='content-wrap'>
+            <!-- 第一副画面 -->
+            <li> 页面1 </li>
+            <!-- 第二副画面 -->
+            <li> 页面2 </li>
+            <!-- 第三副画面 -->
+            <li> 页面3 </li>
+        </ul>
+        <div class="button">
+            <button>点击切换页面</button>
+        </div>
+    </div>
+
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="Swipe.js"></script>
+<script type="text/javascript">
+    var swipe = Swipe($("#content"));
+
+    $("button").click(function() {
+        swipe.scrollTo($('#content').width() * 2, 5000);
+    });
+</script>
+</body>
+</html>
