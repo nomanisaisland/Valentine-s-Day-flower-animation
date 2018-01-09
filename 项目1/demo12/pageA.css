@@ -1,0 +1,65 @@
+/*背景图*/
+
+.a_background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.a_background_top{
+    width: 100%;
+    height: 71.6%;
+    background-image: url("../pic/background/a_background_top.png");
+    background-size: 100% 100%;
+}
+
+
+.a_background_middle{
+    width: 100%;
+    height: 13.1%;
+    background-image: url("../pic/background/a_background_middle.png");
+    background-size: 100% 100%;
+}
+
+.a_background_botton{
+    width: 100%;
+    height: 15.3%;
+    background-image: url("../pic/background/a_background_botton.png");
+    background-size: 100% 100%;
+}
+button {
+    width: 80px;
+    height: 50px;
+}
+
+.button {
+    position: absolute;
+    bottom: 0;
+}
+/*人物暂停*/
+
+.pauseWalk {
+    animation-play-state: paused;
+}
+#sun{
+    position: absolute;
+    right: 1%;
+    width: 201px;
+    height: 201px;
+    background: url(../pic/sun.png) no-repeat;
+    z-index: 1;
+}
+.rotation{
+    -webkit-animation-name: rotation;
+    -webkit-animation-duration: 15s;
+    -moz-animation-name: rotation;
+    -moz-animation-duration: 15s;
+}
+@-webkit-keyframes rotation{
+    0%{
+        transform: translateX(0) translateY(0);
+    }
+    100%{
+        transform: translateX(-700px) translateY(50%);
+    }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>开门灯光效果</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="pageA.css" />
+    <link rel="stylesheet" type="text/css" href="pageB.css" />
+    <style type="text/css">
+    
+    </style>
+</head>
+<body>
+    <div id='content'>
+        <ul class='content-wrap'>
+            <li>
+                <div class="a_background">
+
+                    <div class="a_background_top"></div>
+                    <div class="a_background_middle"></div>
+                    <div class="a_background_botton"></div>
+                </div>
+                <!-- 云 -->
+                <div class="cloudArea">
+
+                    <div class="cloud cloud1"></div>
+                    <div class="cloud cloud2"></div>
+                </div>
+                <!-- 太阳 -->
+                <div id="sun"></div>
+            </li>
+            <li>
+                <!-- 背景图 -->
+                <div class="b_background"></div>
+                <div class="b_background_preload"></div>
+                <!-- 商店 -->
+                <div class="shop">
+                    <div class="door">
+                        <div class="door-left"></div>
+                        <div class="door-right"></div>
+                    </div>
+                    <!-- 灯 -->
+                    <div class="lamp"></div>
+                </div>
+            </li>
+            <li> 页面3 </li>
+        </ul>
+
+        <div id="boy" class="charector"></div>
+    </div>
+    <div class="button">
+        <button>开门亮灯</button>
+        <button>关门灯灭</button>
+    </div>
+
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.transit.min.js"></script> 
+<script type="text/javascript" src="Swipe.js"></script>
+<script type="text/javascript" src="boyWalk.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        var container = $("#content");
+        var swipe = Swipe(container);
+        // 页面滚动到指定的位置
+        function scrollTo(time, proportionX) {
+            var distX = container.width() * proportionX;
+            swipe.scrollTo(distX, time);
+        }
+
+        ////////////////////////////////////////////////////////
+        // ================== 动画处理 ====================== //
+        ////////////////////////////////////////////////////////
+
+        //用来临时调整页面
+        swipe.scrollTo(container.width(), 0);
+
+        var boy = BoyWalk();
+        
+        function doorAction(left, right, time) {
+            var $door = $(".door");
+            var doorLeft = $(".door-left");
+            var doorRight = $(".door-right");
+            var defer = $.Deferred();
+            var count = 2;
+            // 等待门开
+            var complete = function() {
+                if (count == 1) {
+                    defer.resolve();
+                    return;
+                }
+                count-- ;
+            };
+            doorLeft.transition({
+                "left": left 
+            }, time, complete);
+            doorRight.transition({
+                "left": right
+            }, time, complete);
+            return defer;
+        }
+        // 开门
+        function openDoor() { 
+            return doorAction('-50%', '100%', 2000);
+        }
+
+        // 关门
+        function shutDoor() {
+            return doorAction('0%', '50%', 2000);
+        }
+
+
+        // 开门
+        $("button:first").click(function() {
+            openDoor();
+        });
+
+        // 关门
+        $("button:last").click(function() {
+            shutDoor();
+        });
+
+        // 灯动画
+        var lamp = {
+            elem: $(".b_background"),
+            bright: function() {
+                this.elem.addClass("lamp-bright");
+            },
+            dark: function() {
+                this.elem.removeClass("lamp-bright")
+            }
+        };
+
+        //开门
+        $("button:first").click(function() {
+            //开门
+            openDoor().then(function() {
+                lamp.bright();
+            });
+        });
+        $("button:last").click(function() {
+            //关门
+            shutDoor().then(function() {
+                lamp.dark();
+            })
+        })
+    })
+</script>
+</body>
+</html>

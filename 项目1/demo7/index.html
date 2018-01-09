@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>运动的状态控制</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="pageA.css">
+    <style type="text/css">
+    button{
+            width: 80px;
+            height: 50px;
+        }
+        .button{
+            position: absolute;
+            bottom:0;
+        }
+
+        /* 人物暂停 */
+        .pauseWalk {
+            -webkit-animation-play-state: paused;
+            -moz-animation-play-state: paused;
+        }
+    </style>
+</head>
+<body>
+
+	<div id='content'>
+        <ul class='content-wrap'>
+            <li>
+                <div class="a_background">
+                    <div class="a_background_top"></div>
+                    <div class="a_background_middle"></div>
+                    <div class="a_background_botton"></div>
+                </div>
+            </li>
+            <li> 页面2 </li>
+            <li> 页面3 </li>
+        </ul>
+        <div id="boy" class="charector"></div>
+    </div>
+    <div class="button">
+        <button>开始</button>
+        <button>暂停</button>     
+    </div>
+
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../node_modules/jquery/dist/jquery.transit.min.js"></script>  
+<script type="text/javascript" src="Swipe.js"></script>
+<script type="text/javascript">
+    var swipe = Swipe($("#content"));
+
+    //获取数据
+    var getValue = function(className) {
+        var $elem = $('' + className + ''); //?
+        // var $elem = $(className); //为什么不是这个？
+        //走路的路线坐标
+        return{
+            height: $elem.height(),
+            top: $elem.position().top
+        };
+    };
+
+    //路的Y轴
+    var pathY = function() {
+        var data = getValue('.a_background_middle');
+        return data.top + data.height / 2;
+    }();
+
+    var $boy = $("#boy");
+    var boyHeight = $boy.height();
+
+    $boy.css({
+        top: pathY - boyHeight + 25   //获得小男孩的Y轴坐标
+        })
+
+    // ==========================
+    //     增加精灵动画
+    // ==========================
+
+    $("button:first").click(function() {
+        // left的变化
+        if($boy.hasClass('pauseWalk')) {
+
+            $boy.removeClass('pauseWalk');
+
+        }
+        $boy.addClass("slowWalk").transition({
+            'left': $("#content").width() + 'px',
+        }, 10000, 'linear', function() {});   //为什么不可以 要安装transit插件
+         /*$boy.animation({
+            'left': $("#content").width() + 'px',
+        }, 1000, 'linear', function() {});*/  //为什么不可以
+
+        /*$boy.css({
+
+            'left': $("#content").width() + 'px',
+
+            'transition': 'all 10s linear 0s'
+
+        });*/
+    });
+    $("button:last").click(function() {
+
+        var left = $boy.css('left');
+        $boy.css("left", left);
+        $boy.addClass("pauseWalk");
+        // $boy.removeClass("slowWalk");    
+    })
+    
+</script>
+</body>
+</html>

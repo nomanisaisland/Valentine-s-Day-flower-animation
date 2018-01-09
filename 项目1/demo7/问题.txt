@@ -1,0 +1,22 @@
+运动的状态控制
+通过CSS3的animation与transition的结合实现了人物的走路的效果。一般来说运动的状态都是需要可控的，这样才方便我们做进一步的操作。
+
+animation的暂停方式
+
+CSS3的animation直接提供一个animation-play-state的样式来控制动画的暂停处理。增加一个控制暂停样式，写动画样式的时候特别注意下不同浏览器的兼容性，加上对应的前缀
+
+.pauseWalk {
+   -webkit-animation-play-state: paused;
+   -moz-animation-play-state: paused;
+}
+只需要在对应的有animation动画人物元素节点上，通过动态增加删除这个样式就可以控制这个精灵的开始与暂停了，非常简单
+
+transition的暂停方式
+
+至于transition，一般来说要暂停的地方都是一开始就程序设定好的目标点，因此这个其实是不需要控制的，这个也没办法控制，这个是一个动画过渡的效果，浏览器只提供了一个动画结束的回调。当然可以有一个变通的办法，做一个强制改变目标过渡值的处理
+
+如何操作：
+
+具体可以看右边的代码块，暂停方法内transition强制做了一个设置left坐标的处理，达到一个暂停的效果，但是这样是有问题的，下一次的启动必须等上一次动画的时间结束
+
+不难看出animation要比transition强大多了
