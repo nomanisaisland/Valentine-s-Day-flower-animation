@@ -1,0 +1,133 @@
+/*背景图*/
+
+.a_background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.a_background_top{
+    width: 100%;
+    height: 71.6%;
+    background-image: url("../pic/background/a_background_top.png");
+    background-size: 100% 100%;
+}
+
+
+.a_background_middle{
+    width: 100%;
+    height: 13.1%;
+    background-image: url("../pic/background/a_background_middle.png");
+    background-size: 100% 100%;
+}
+
+.a_background_botton{
+    width: 100%;
+    height: 15.3%;
+    background-image: url("../pic/background/a_background_botton.png");
+    background-size: 100% 100%;
+}
+button {
+    width: 80px;
+    height: 50px;
+}
+
+.button {
+    position: absolute;
+    bottom: 0;
+}
+/*人物暂停*/
+
+.pauseWalk {
+    animation-play-state: paused;
+}
+#sun{
+    position: absolute;
+    right: 1%;
+    width: 201px;
+    height: 201px;
+    background: url(../pic/sun.png) no-repeat;
+    z-index: 1;
+}
+.rotation{
+    -webkit-animation-name: rotation;
+    -webkit-animation-duration: 15s;
+    -moz-animation-name: rotation;
+    -moz-animation-duration: 15s;
+}
+@-webkit-keyframes rotation{
+    0%{
+        transform: translateX(0) translateY(0);
+    }
+    100%{
+        transform: translateX(-700px) translateY(50%);
+    }
+}
+/*云*/
+.cloud{
+    position: absolute;
+    z-index: 2
+}
+.cloud1 {
+    width: 181px;
+    height: 101px;
+    left: -5%;
+    top: 15%;
+    background: url("../pic/cloud1.png");
+}
+
+
+.cloud2 {
+    width: 301px;
+    height: 140px;
+    left: 100%;
+    background: url("../pic/cloud2.png");
+}
+.cloud1Anim{
+    -webkit-animation-name: smallCloud;
+    -webkit-animation-duration: 15s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-name: smallCloud;
+    -moz-animation-duration: 15s;
+    -moz-animation-iteration-count: infinite;
+}
+.cloud2Anim{
+    -webkit-animation-name: largeCloud;
+    -webkit-animation-duration: 10s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-name: largeCloud;
+    -moz-animation-duration: 10s;
+    -moz-animation-iteration-count: infinite;
+}
+@-webkit-keyframes smallCloud{
+    0%{
+        left: -5%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+@-moz-keyframes smallCloud{
+    0%{
+        left: -5%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+@-webkit-keyframes largeCloud{
+    0%{
+        left: 100%;
+    }
+    100%{
+        left: 5%;
+    }
+}
+@-moz-keyframes largeCloud{
+    0%{
+        left: 100%;
+    }
+    100%{
+        left: 5%;
+    }
+}
